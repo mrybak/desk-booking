@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^search_desk/$', views.search_desk, name='search_desk'),
     url(r'^search_room/$', views.search_room, name='search_room'),
     url(r'^results/$', views.results, name='results'),
-    url(r'^my_reservations$', views.my_reservations, name='my_reservations'),
+    url(r'^my_reservations$/', views.my_reservations, name='my_reservations'),
+    url(r'^book_desk/(?P<desk_id>\d+)/$', views.book_desk, name='book_desk'),
 )

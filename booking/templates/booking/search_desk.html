@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>searck desk</title>
+</head>
+<body>
+<h1>search for a desks.</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'b:results' %}" method="get">
+    <input type="date" name="date_from" id="date_from" />
+    <input type="date" name="date_to" id="date_to" />
+    <input type="number" name="hour_from" id="hour_from" />
+    <input type="number" name="hour_to" id="hour_to" />
+    <input type="submit" value="search" />
+</form>
+
+</body>
+</html>

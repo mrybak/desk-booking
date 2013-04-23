@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    login page view
+    {% if desk_list %}
+        <ul>
+            {% for desk in desk_list %}
+                <li>{{ desk.description }} <a href="{%  url 'b:book_desk' desk.id %}">sprawdz to</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No desks are available.</p>
+    {% endif %}
+
+</body>
+</html>
