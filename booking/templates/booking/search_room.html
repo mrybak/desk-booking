@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>biurko</title>
+    <title>szukaj pokoju</title>
 </head>
 <body>
-<h2>szukaj biurka</h2>
+<h2>szukaj pokoju</h2>
 
 <a href="{% url 'b:index' %}">powrót</a><br />
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'b:results' %}" method="get">
+    ile osób? <input type="number" name="people_count" id="people_count" /><br />
     <input type="date" name="date_from" id="date_from" />
     <input type="date" name="date_to" id="date_to" />
     <input type="number" name="hour_from" id="hour_from" />
     <input type="number" name="hour_to" id="hour_to" />
     <input type="submit" value="search" />
 </form>
-
 </body>
 </html>

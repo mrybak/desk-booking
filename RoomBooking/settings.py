@@ -1,4 +1,5 @@
 # Django settings for RoomBooking project.
+# coding=utf-8
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -33,7 +34,7 @@ TIME_ZONE = 'Europe/Warsaw'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl'
 
 SITE_ID = 1
 
@@ -106,6 +107,8 @@ MIDDLEWARE_CLASSES = (
 INTERNAL_IPS = ('127.0.0.1',)
 
 ROOT_URLCONF = 'RoomBooking.urls'
+
+LOGIN_URL = '/booking/'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'RoomBooking.wsgi.application'

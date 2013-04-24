@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+{% if object_list %}
+    <ul>
+        {% for resv in object_list %}
+            <li>{{  resv }}<a href="/booking/reservations/delete/{{ resv.id }}/">delete</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No reservations are available.</p>
+{% endif %}
+</body>
+</html>
