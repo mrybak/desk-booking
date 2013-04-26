@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>szukaj pokoju</title>
-</head>
-<body>
-<h2>szukaj pokoju</h2>
+{% extends 'booking/base.html' %}
 
-<a href="{% url 'b:index' %}">powrót</a><br />
+{%  block title %}Szukaj pokoju{%  endblock %}
+{%  block content_title %}Szukaj pokoju{%  endblock %}
+
+{%  block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -18,5 +15,4 @@
     <input type="number" name="hour_to" id="hour_to" />
     <input type="submit" value="search" />
 </form>
-</body>
-</html>
+{%  endblock %}

@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "booking/base_login.html" %}
 
+{% block title %}Rejestracja{% endblock %}
 
-<a href="{% url 'b:login' %}">powrót</a><br />
-    <form method="post" action="{% url 'b:create_user' %}">
+{% block form %}
+    <form method="post" class="form-signin" action="{% url 'b:create_user' %}">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>E-mail</td>
-                <td><input type="text" name="username"></td>
-            </tr>
-            <tr>
-                <td>Hasło</td>
-                <td><input type="password" name="password"></td>
-            </tr>
-            <tr>
-                <td>Powtórz hasło</td>
-                <td><input type="password" name="re_password"></td>
-            </tr>
-        </table>
-
-        <input type="submit" value="zarejestruj" />
+        <h2 class="form-signin-heading">Rejestracja</h2>
+        <input type="text" class="input-block-level" name="username" placeholder="Email">
+        <input type="password" class="input-block-level" name="password" placeholder="Hasło">
+        <input type="password" class="input-block-level" name="re_password" placeholder="Powtórz hasło">
+        <button class="btn btn-large btn-primary" type="submit">Zarejestruj się</button>
+        <p><br /><a href="{% url 'b:login' %}">Powrót</a></p>
     </form>
-</body>
-</html>
+{%  endblock %}

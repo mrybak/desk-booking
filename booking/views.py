@@ -49,16 +49,6 @@ def create_user(request):
         return redirect('/booking/register')
 
 @login_required
-def book_desk(request, desk_id):
-    desk = get_object_or_404(Desk, pk=desk_id)
-    return render(request, 'booking/desk_detail.html', {'desk': desk})
-
-@login_required
-def book_room(request, room_id):
-    room = get_object_or_404(Room, pk=room_id)
-    return render(request, 'booking/room_detail.html', {'room': room})
-
-@login_required
 def index(request):
     return render(request, 'booking/index.html')
 

@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends 'booking/base.html' %}
 
-<a href="{% url 'b:index' %}">powrót</a><br />
+{%  block title %}Moje rezerwacje{%  endblock %}
+{%  block content_title %}Moje rezerwacje{%  endblock %}
 
-{% if object_list %}
-       {% for resv in object_list %}
-           {{  resv }}
-           <form method="post" action="{% url 'b:cancel_reservation' %}">
-               {% csrf_token %}
-               <input type="hidden" name="resv_id" value="{{ resv.id }}" />
-               <input type="submit" value="anuluj rezerwację" />
-           </form>
-       {% endfor %}
-{% else %}
-    <p>No reservations are available.</p>
-{% endif %}
-</body>
-</html>
+{%  block content %}
+    {% if object_list %}
+           {% for resv in object_list %}
+               {{  resv }}
+               <form method="post" action="{% url 'b:cancel_reservation' %}">
+                   {% csrf_token %}
+                   <input type="hidden" name="resv_id" value="{{ resv.id }}" />
+                   <input type="submit" value="anuluj rezerwację" />
+               </form>
+           {% endfor %}
+    {% else %}
+        <p>No reservations are available.</p>
+    {% endif %}
+{%  endblock %}

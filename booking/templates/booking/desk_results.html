@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<a href="{% url 'b:search_desk' %}">powrót</a><br />
-{% if object_list %}
-    <ul>
-        {% for desk in object_list %}
-            <li>{{ desk }}
-            <form method="post" action="{% url 'b:book_desk' %}">
-                {% csrf_token %}
-                <input type="hidden" name="desk_id" value="{{ desk.id }}" />
-                <input type="submit" value="bierz" />
-            </form>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No desks are available.</p>
-{% endif %}
-</body>
-</html>
+{% extends 'booking/base.html' %}
+
+{%  block title %}Wyniki{%  endblock %}
+{%  block content_title %}Wyniki{%  endblock %}
+
+{%  block content %}
+    {% if object_list %}
+        <ul>
+            {% for desk in object_list %}
+                <li>{{ desk }}
+                <form method="post" action="{% url 'b:book_desk' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="desk_id" value="{{ desk.id }}" />
+                    <input type="submit" value="bierz" />
+                </form>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No desks are available.</p>
+    {% endif %}
+{% endblock %}

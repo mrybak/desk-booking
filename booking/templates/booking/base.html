@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Strona główna{%  endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../../static/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="{% url 'b:index' %}">Booking</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="{% url 'b:search_desk' %}">Szukaj biurka</a></li>
+                    <li><a href="{% url 'b:search_room' %}">Szukaj pokoju</a></li>
+                    <li><a href="{% url 'b:my_reservations' %}">Moje rezerwacje</a></li>
+                </ul>
+                <div class="navbar-form pull-right">
+                    <ul class="nav">
+                        <li class="active"><a href="{% url 'b:logout' %}">Wyloguj się</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-unit">
+        <h1>{%  block content_title %}Witaj w systemie rezerwacji biurek!{%  endblock %}</h1>
+        {%  block content %}
+        <p>Aby zarezerwować biurko lub anulować wcześniejszą rezerwację, użyj menu na górze.</p>
+        {% endblock %}
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>&copy; mr321163 2013</p>
+    </footer>
+
+</div> <!-- /container -->
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

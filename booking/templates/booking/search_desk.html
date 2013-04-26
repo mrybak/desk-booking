@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>biurko</title>
-</head>
-<body>
-<h2>szukaj biurka</h2>
+{% extends 'booking/base.html' %}
 
-<a href="{% url 'b:index' %}">powrót</a><br />
+{%  block title %}Szukaj biurka{%  endblock %}
+{%  block content_title %}Szukaj biurka{%  endblock %}
+{%  block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -17,6 +13,4 @@
     <input type="number" name="hour_to" id="hour_to" />
     <input type="submit" value="search" />
 </form>
-
-</body>
-</html>
+{% endblock %}
