@@ -4,16 +4,45 @@
 {%  block content_title %}Moje rezerwacje{%  endblock %}
 
 {%  block content %}
+    {% if success == '0' %}
+        <br />
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Błąd!</strong> Rezerwacja o podanym ID nie istnieje.
+        </div>
+{%  endif %}
+    {% if success == '1' %}
+        <br />
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Rezerwacja pomyślnie usunięta.
+        </div>
+    {%  endif %}
     {% if object_list %}
+    <br />
+    <table class="table table-bordered table-striped">
+           <thead>
+               <tr>
+                   <th>Biurko</th>
+                   <th>Okres</th>
+               </tr>
+           </thead>
+           <tbody>
            {% for resv in object_list %}
-               {{  resv }}
-               <form method="post" action="{% url 'b:cancel_reservation' %}">
-                   {% csrf_token %}
-                   <input type="hidden" name="resv_id" value="{{ resv.id }}" />
-                   <input type="submit" value="anuluj rezerwację" />
-               </form>
+               <tr>
+                   <td>{{  resv.desk }}</td>
+                   <td>{{  resv.period }}</td>
+                   <td><form method="post" action="{% url 'b:cancel_reservation' %}">
+                       {% csrf_token %}
+                       <input type="hidden" name="resv_id" value="{{ resv.id }}" />
+                       <input type="submit" class="btn btn-primary" value="anuluj rezerwację" />
+                   </form></td>
+
+               </tr>
            {% endfor %}
+           </tbody>
+    </table>
     {% else %}
-        <p>No reservations are available.</p>
+        <p>Twoja lista rezerwacji jest pusta.</p>
     {% endif %}
 {%  endblock %}

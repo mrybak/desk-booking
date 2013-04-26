@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -52,21 +53,29 @@ class Period(models.Model):
     saturday = models.BooleanField(default=True)
     sunday = models.BooleanField(default=True)
     def __unicode__(self):
-        result = "from " + str(self.from_date) + " to " + str(self.to_date) + " between " + str(self.from_hour) + "-" + str(self.to_hour) + " + every: "
+        result = "Od " + str(self.from_date) + " do " + str(self.to_date) + " w: "
         if self.monday:
-            result += "Monday "
+            result += "poniedziałek, "
         if self.tuesday:
-            result += "Tuesday "
+            result += "wtorek, "
         if self.wednesday:
-            result += "Wednesday "
+            result += "środę, "
         if self.thursday:
-            result += "Thursday "
+            result += "czwartek, "
         if self.friday:
-            result += "Friday "
+            result += "piątek, "
         if self.saturday:
-            result += "Saturday "
+            result += "sobotę, "
         if self.sunday:
-            result += "Sunday "
+            result += "niedzielę, "
+        if self.from_hour is None and self.to_hour is None:
+            result += " przez cały dzień"
+        elif self.from_hour is None:
+            result += " do godziny " + str(self.to_hour)
+        elif self.to_hour is None:
+            result += " od godziny " + str(self.from_hour)
+        else:
+            result += " w godzinach " + str(self.from_hour) + "-" + str(self.from_hour)
         return result
     
     class Meta:

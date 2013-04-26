@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.datastructures import MultiValueDictKeyError
 
 from django.views.generic import ListView
 from booking.models import Desk, BasePricePeriod, BasePrice, ReservationPeriod, Room, Reservation
@@ -115,10 +116,22 @@ class ReservationList(ListView):
     template_name = 'booking/my_reservations.html'
     def get_queryset(self):
         return Reservation.objects.filter(user = self.request.user)
+    def get_context_data(self, **kwargs):
+        context = super(ReservationList, self).get_context_data(**kwargs)
+        try:
+            success = self.request.GET['success']
+            if success is not None:
+                context['success'] = success
+        except (MultiValueDictKeyError):
+            pass
+        return context
 
 @login_required
 def cancel_reservation(request):
     resv_id = request.POST['resv_id']
     r = Reservation.objects.get(pk = resv_id)
-    r.delete()
-    return HttpResponse('ok')
+    if r is not None:
+        r.delete()
+        return redirect('/booking/my_reservations?success=1')
+    else:
+        return redirect('/booking/my_reservations?success=0')
