@@ -63,26 +63,33 @@ def search_room(request):
 
 @login_required
 def book_desk(request):
-    desk_id = request.POST['desk_id']
-    r = Reservation()
-    r.user = request.user
-    r.desk = Desk.objects.get(pk = desk_id)
-    # ugly hack
-    r.period_id = 1
-    r.save()
-    return HttpResponse('ok')
+    try:
+        desk_id = request.POST['desk_id']
+        r = Reservation()
+        r.user = request.user
+        r.desk = Desk.objects.get(pk = desk_id)
+        # ugly hack, trzeba tu tworzyć nowy period
+        r.period_id = 1
+        r.save()
+        return redirect('/booking/my_reservations?success=2')
+    except (Exception):
+        return redirect('/booking/my_reservations?success=4')
 
 @login_required
 def book_room(request):
-    room_id = request.POST['room_id']
-    r = Reservation()
-    r.user = request.user
-    # change
-    r.desk = Desk.objects.get(pk = room_id)
-    # ugly hack
-    r.period_id = 1
-    r.save()
-    return HttpResponse('ok' + str(request.user.id))
+    try:
+        room_id = request.POST['room_id']
+        r = Reservation()
+        r.user = request.user
+        # change
+        r.desk = Desk.objects.get(pk = room_id)
+        # ugly hack
+        r.period_id = 1
+        r.save()
+        return redirect('/booking/my_reservations?success=3')
+    except (Exception):
+        return redirect('/booking/my_reservations?success=4')
+
 
 class DeskList(ListView):
     template_name = 'booking/desk_results.html'

@@ -9,7 +9,7 @@
     <file path="/models.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366942700110" ignored="false" />
     <file path="/Django Console" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366839703735" ignored="false" />
     <file path="/admin.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366180754130" ignored="false" />
-    <file path="/views.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366944265300" ignored="false" />
+    <file path="/views.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366945862192" ignored="false" />
     <file path="/urls.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366935804362" ignored="false" />
     <file path="/login.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366937280495" ignored="false" />
     <file path="/desk_detail.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366698153496" ignored="false" />
@@ -17,9 +17,9 @@
     <file path="/index.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366938187467" ignored="false" />
     <file path="/room_detail.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366832365053" ignored="false" />
     <file path="/search_room.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366939324231" ignored="false" />
-    <file path="/my_reservations.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366945006023" ignored="false" />
+    <file path="/my_reservations.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366945784569" ignored="false" />
     <file path="/register.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366937564433" ignored="false" />
-    <file path="/desk_results.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366939228629" ignored="false" />
+    <file path="/desk_results.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366945506821" ignored="false" />
     <file path="/room_results.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366939252411" ignored="false" />
     <file path="/base_login.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366937369946" ignored="false" />
     <file path="/base.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366942182543" ignored="false" />
@@ -39,10 +39,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/booking/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="22" selection-start="3739" selection-end="4077" vertical-scroll-proportion="0.0">
+            <state line="69" column="47" selection-start="2228" selection-end="2228" vertical-scroll-proportion="0.35163552">
               <folding>
                 <element signature="e#15#74#0" expanded="true" />
               </folding>
@@ -68,10 +68,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="my_reservations.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="my_reservations.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/templates/booking/my_reservations.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="20" selection-start="898" selection-end="898" vertical-scroll-proportion="0.48677886">
+            <state line="32" column="5" selection-start="1160" selection-end="1160" vertical-scroll-proportion="-20.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="desk_results.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/booking/templates/booking/desk_results.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="25" selection-start="331" selection-end="331" vertical-scroll-proportion="-7.5">
               <folding />
             </state>
           </provider>
@@ -116,13 +125,13 @@
         <option value="$PROJECT_DIR$/booking/templates/booking/index.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/search_desk.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/search_room.html" />
-        <option value="$PROJECT_DIR$/booking/templates/booking/desk_results.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/room_results.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/base.html" />
         <option value="$PROJECT_DIR$/booking/models.py" />
         <option value="$PROJECT_DIR$/RoomBooking/settings.py" />
-        <option value="$PROJECT_DIR$/booking/views.py" />
+        <option value="$PROJECT_DIR$/booking/templates/booking/desk_results.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/my_reservations.html" />
+        <option value="$PROJECT_DIR$/booking/views.py" />
       </list>
     </option>
   </component>
@@ -566,13 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/templates/booking/desk_results.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="18" selection-start="93" selection-end="93" vertical-scroll-proportion="-1.875">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/booking/templates/booking/room_results.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="18" selection-start="93" selection-end="93" vertical-scroll-proportion="0.05408654">
@@ -594,12 +596,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/models.py">
+    <entry file="file://$PROJECT_DIR$/booking/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="68" selection-start="2549" selection-end="2549" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#15#58#0" expanded="true" />
-          </folding>
+        <state line="18" column="84" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -610,9 +610,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/urls.py">
+    <entry file="file://$PROJECT_DIR$/booking/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="84" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0">
+        <state line="77" column="68" selection-start="2549" selection-end="2549" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#15#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/templates/booking/desk_results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="25" selection-start="331" selection-end="331" vertical-scroll-proportion="-7.5">
           <folding />
         </state>
       </provider>
@@ -624,19 +633,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/views.py">
+    <entry file="file://$PROJECT_DIR$/booking/templates/booking/my_reservations.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="22" selection-start="3739" selection-end="4077" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#15#74#0" expanded="true" />
-          </folding>
+        <state line="32" column="5" selection-start="1160" selection-end="1160" vertical-scroll-proportion="-20.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/templates/booking/my_reservations.html">
+    <entry file="file://$PROJECT_DIR$/booking/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="20" selection-start="898" selection-end="898" vertical-scroll-proportion="0.48677886">
-          <folding />
+        <state line="69" column="47" selection-start="2228" selection-end="2228" vertical-scroll-proportion="0.35163552">
+          <folding>
+            <element signature="e#15#74#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
