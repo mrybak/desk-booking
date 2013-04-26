@@ -10,7 +10,7 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'b:results' %}" method="get">
+<form action="{% url 'b:desk_results' %}" method="get">
     <input type="date" name="date_from" id="date_from" />
     <input type="date" name="date_to" id="date_to" />
     <input type="number" name="hour_from" id="hour_from" />

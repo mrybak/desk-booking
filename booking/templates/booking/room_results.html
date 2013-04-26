@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<a href="{% url 'b:search_room' %}">powrót</a><br />
+{% if object_list %}
+    <ul>
+        {% for room in object_list %}
+            <li>{{ room }}
+            <form method="post" action="{% url 'b:book_room' %}">
+                {% csrf_token %}
+                <input type="hidden" name="room_id" value="{{ room.id }}" />
+                <input type="submit" value="bierz" />
+            </form>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No rooms are available.</p>
+{% endif %}
+</body>
+</html>

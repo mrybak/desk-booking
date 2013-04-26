@@ -98,3 +98,5 @@ class Reservation(models.Model):
     user = models.ForeignKey(User)
     desk = models.ForeignKey(Desk)
     period = models.ForeignKey(ReservationPeriod)
+    def __unicode__(self):
+        return "user: " + str(self.user) + ", desk " + str(self.desk) + ", period: " + str(self.period)
