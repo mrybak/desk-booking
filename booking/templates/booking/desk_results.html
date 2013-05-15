@@ -1,10 +1,10 @@
 {% extends 'booking/base.html' %}
 
 {%  block title %}Wyniki{%  endblock %}
-{%  block content_title %}Wyniki{%  endblock %}
+{%  block content_title %}Wyniki dla okresu {{ period }}{%  endblock %}
 
 {%  block content %}
-    {% if object_list %}
+    {% if desks.count %}
     <br />
     <table class="table table-bordered table-striped">
         <thead>
@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for desk in object_list %}
+            {% for desk in desks %}
                 <tr>
                     <td>{{ desk.description }}</td>
                     <td>{{ desk.room }}</td>
@@ -22,6 +22,7 @@
                         <form method="post" action="{% url 'b:book_desk' %}">
                             {% csrf_token %}
                             <input type="hidden" name="desk_id" value="{{ desk.id }}" />
+                            <input type="hidden" name="period" value="{{ period }}" />
                             <input type="submit" class="btn btn-primary" value="Zarezerwuj" />
                         </form>
                     </td>
@@ -30,6 +31,7 @@
         </tbody>
     </table>
     {% else %}
-        <p>Brak wolnych biurek w tym okresie.</p>
+        <p>{{ message }}</p>
     {% endif %}
+
 {% endblock %}

@@ -1,6 +1,9 @@
 # coding=utf-8
+import datetime
+import time
 from django.contrib.auth.models import User
 from django.db import models
+from django.forms import ModelForm
 
 
 class Room(models.Model):
@@ -52,47 +55,127 @@ class Period(models.Model):
     friday = models.BooleanField(default=True)
     saturday = models.BooleanField(default=True)
     sunday = models.BooleanField(default=True)
-    def __unicode__(self):
-        result = "Od " + str(self.from_date) + " do " + str(self.to_date) + " w: "
+
+    # list of weekday codes
+    def getDayset(self):
+        dayset = []
         if self.monday:
-            result += "poniedziałek, "
+            dayset.append(0)
         if self.tuesday:
-            result += "wtorek, "
+            dayset.append(1)
         if self.wednesday:
-            result += "środę, "
+            dayset.append(2)
         if self.thursday:
-            result += "czwartek, "
+            dayset.append(3)
         if self.friday:
-            result += "piątek, "
+            dayset.append(4)
         if self.saturday:
-            result += "sobotę, "
+            dayset.append(5)
         if self.sunday:
-            result += "niedzielę, "
+            dayset.append(6)
+        return dayset
+
+    # list of timestamps for all hours in this period
+    def getHourset(self):
+        hourset = []
+        one_day = datetime.timedelta(days=1)
+        dayset = self.getDayset()
+        start_hour = self.from_hour if self.from_hour != None else 0
+        end_hour = self.to_hour if self.to_hour != None else 24
+        # iterate through all days of a period
+        cur_day = self.from_date
+        while cur_day <= self.to_date:
+            # if current day is within chosen days of week
+            if dayset.count(cur_day.weekday()):
+                for cur_hour in range(start_hour, end_hour):
+                    cur_datetime = datetime.datetime(cur_day.year, cur_day.month, cur_day.day, cur_hour)
+                    # DEBUG: hourset.append(cur_datetime)
+                    timestamp = time.mktime(cur_datetime.timetuple())
+                    hourset.append(timestamp)
+            cur_day += one_day
+
+        return hourset
+
+    # does this period contain a given timestamp?
+    def contains(self, timestamp):
+        return self.getHourset().count(timestamp)
+
+    # does this period have a non-void intersection with given period?
+    def intersects_with(self, other_period):
+        result = False
+        for hour in other_period.getHourset():
+            if self.getHourset().count(hour):
+                result = True
+
+        return result
+
+    # does every hour of this period have some BasePrice set?
+    def has_baseprice(self):
+        result = True
+        for hour in self.getHourset():
+            for bpp in BasePricePeriod.objects.all():
+                if not bpp.contains(hour):
+                    result = False
+
+        return result
+
+    def find_free_desks(self):
+        free_desks_ids = []
+        for desk in Desk.objects.all():
+            free_desks_ids.append(desk.id)
+        for resv in Reservation.objects.all():
+            if resv.period.intersects_with(self):
+                if free_desks_ids.count(resv.desk_id):
+                    free_desks_ids.remove(resv.desk_id)
+
+        return Desk.objects.filter(id__in=free_desks_ids)
+
+    def __unicode__(self):
+        result = "od " + str(self.from_date) + " do " + str(self.to_date) + " w: "
+        if self.monday:
+            result += "pn "
+        if self.tuesday:
+            result += "wt "
+        if self.wednesday:
+            result += "sr "
+        if self.thursday:
+            result += "czw "
+        if self.friday:
+            result += "pt "
+        if self.saturday:
+            result += "sob "
+        if self.sunday:
+            result += "nd "
         if self.from_hour is None and self.to_hour is None:
-            result += " przez cały dzień"
+            result += " przez caly dzien"
         elif self.from_hour is None:
             result += " do godziny " + str(self.to_hour)
         elif self.to_hour is None:
             result += " od godziny " + str(self.from_hour)
         else:
-            result += " w godzinach " + str(self.from_hour) + "-" + str(self.from_hour)
+            result += " w godzinach " + str(self.from_hour) + "-" + str(self.to_hour)
         return result
     
     class Meta:
         abstract = True
 
+
+
 class BasePricePeriod(Period):
     base_price = models.ForeignKey(BasePrice)
-    """
+
     def clean(self):
         from django.core.exceptions import ValidationError
+        overlapped = False
+        for old_bpp in BasePricePeriod.objects.all():
+            if old_bpp.intersects_with(self):
+                overlapped = True
+
         # Raise error if given BasePrice overlaps any other in this database
-        if self.status == 'draft' and self.pub_date is not None:
-            raise ValidationError('Draft entries may not have a publication date.')
-            # Set the pub_date for published items if it hasn't been set already.
-        if self.status == 'published' and self.pub_date is None:
-            self.pub_date = datetime.date.today()
-    """
+        if overlapped:
+            raise ValidationError('Okresy obowiązywania cen bazowych nie mogą na siebie nachodzić.')
+
+
 
 class WholeRoomDiscountPeriod(Period):
     whole_room_discount = models.ForeignKey(WholeRoomDiscount)
@@ -102,6 +185,10 @@ class PersonHourDiscountPeriod(Period):
 
 class ReservationPeriod(Period):
     user = models.ForeignKey(User)
+
+class PeriodForm(ModelForm):
+    class Meta:
+        model = Period
 
 class Reservation(models.Model):
     user = models.ForeignKey(User)

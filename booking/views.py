@@ -1,4 +1,5 @@
 # coding=utf-8
+from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -6,6 +7,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.datastructures import MultiValueDictKeyError
+
+
 
 from django.views.generic import ListView
 from booking.models import Desk, BasePricePeriod, BasePrice, ReservationPeriod, Room, Reservation
@@ -90,29 +93,31 @@ def book_room(request):
     except (Exception):
         return redirect('/booking/my_reservations?success=4')
 
+@login_required
+def desk_results(request):
+    p = ReservationPeriod()
+    p.from_hour = int(request.GET['hour_from'])
+    p.to_hour = int(request.GET['hour_to'])
+    p.from_date = datetime.strptime(request.GET['date_from'], '%Y-%m-%d').date()
+    p.to_date = datetime.strptime(request.GET['date_to'], '%Y-%m-%d').date()
+    p.monday = request.GET.get('dayweek_0', False)
+    p.tuesday = request.GET.get('dayweek_1', False)
+    p.wednesday = request.GET.get('dayweek_2', False)
+    p.thursday = request.GET.get('dayweek_3', False)
+    p.friday = request.GET.get('dayweek_4', False)
+    p.saturday = request.GET.get('dayweek_5', False)
+    p.sunday = request.GET.get('dayweek_6', False)
+    p.user_id = request.user.id
 
-class DeskList(ListView):
-    template_name = 'booking/desk_results.html'
-    def get_queryset(self):
-        return Desk.objects.all()
+    desks = p.find_free_desks() if p.has_baseprice() else []
+    message = "Brak wolnych biurek w tym okresie." if p.has_baseprice() else "Brak ustalonych cen bazowych w tym okresie."
+    context = {
+        'period' : p,
+        'desks' : desks,
+        'message' : message,
+    }
+    return render(request, 'booking/desk_results.html', context)
 
-
-    # try:
-    #     hour_from = request.GET['hour_from']
-    #     hour_to = request.GET['hour_to']
-    #     date_from = request.GET['date_from']
-    #     date_to = request.GET['date_to']
-    # except (KeyError, Desk.DoesNotExist):
-        # Redisplay the search form.
-        # return render(request, 'booking/search_desk.html', {
-        #     'error_message': "Please fill in all the data.",
-        #     })
-    # else:
-        # desks = BasePricePeriod.objects.filter(from_date__lt=date_from, to_date__gte=date_to)
-        # for d in desks:
-        #     price[d] = BasePrice.objects.filter(pk=d.base_price)
-            # cośtam policz to no.
-        # return HttpResponse((d, price[d]) for d in desks)
 
 class RoomList(ListView):
     template_name = 'booking/room_results.html'
