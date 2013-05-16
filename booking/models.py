@@ -1,10 +1,12 @@
 # coding=utf-8
 import datetime
+import logging
 import time
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ModelForm
 
+log = logging.getLogger('myapp.logger')
 
 class Room(models.Model):
     city = models.CharField(max_length=100)
@@ -104,7 +106,7 @@ class Period(models.Model):
     def intersects_with(self, other_period):
         result = False
         for hour in other_period.getHourset():
-            if self.getHourset().count(hour):
+            if self.contains(hour):
                 result = True
 
         return result
@@ -113,9 +115,12 @@ class Period(models.Model):
     def has_baseprice(self):
         result = True
         for hour in self.getHourset():
+            found = False
             for bpp in BasePricePeriod.objects.all():
-                if not bpp.contains(hour):
-                    result = False
+                 if bpp.contains(hour):
+                    found = True
+            if not found:
+                result = False
 
         return result
 

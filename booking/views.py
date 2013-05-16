@@ -1,5 +1,6 @@
 # coding=utf-8
 from datetime import datetime
+import logging
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -7,12 +8,10 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.datastructures import MultiValueDictKeyError
-
-
-
 from django.views.generic import ListView
 from booking.models import Desk, BasePricePeriod, BasePrice, ReservationPeriod, Room, Reservation
 
+log = logging.getLogger('myapp.logger')
 
 def login_view(request):
     return render(request, 'booking/login.html')
@@ -72,7 +71,14 @@ def book_desk(request):
         r.user = request.user
         r.desk = Desk.objects.get(pk = desk_id)
         # ugly hack, trzeba tu tworzyć nowy period
-        r.period_id = 1
+        p = request.session.get('period')
+        log.debug("rezerwacja: ")
+        log.debug(p)
+        log.debug(p.from_date)
+        log.debug(p.has_baseprice)
+        log.debug(p.id)
+        p.save()
+        r.period_id = p.id
         r.save()
         return redirect('/booking/my_reservations?success=2')
     except (Exception):
@@ -96,8 +102,8 @@ def book_room(request):
 @login_required
 def desk_results(request):
     p = ReservationPeriod()
-    p.from_hour = int(request.GET['hour_from'])
-    p.to_hour = int(request.GET['hour_to'])
+    p.from_hour = 0 if request.GET['hour_from'] == "" else int(request.GET['hour_from'])
+    p.to_hour = 24 if request.GET['hour_to'] == "" else int(request.GET['hour_to'])
     p.from_date = datetime.strptime(request.GET['date_from'], '%Y-%m-%d').date()
     p.to_date = datetime.strptime(request.GET['date_to'], '%Y-%m-%d').date()
     p.monday = request.GET.get('dayweek_0', False)
@@ -109,10 +115,20 @@ def desk_results(request):
     p.sunday = request.GET.get('dayweek_6', False)
     p.user_id = request.user.id
 
+    log.debug('=======================================================================================================')
+    log.debug(p.getHourset())
+    log.debug('\n')
+    log.debug(p)
+    log.debug('\n')
+    log.debug(BasePricePeriod.objects.all())
+    log.debug('\n')
+    log.debug(p.has_baseprice())
+    log.debug('\n\n')
+
     desks = p.find_free_desks() if p.has_baseprice() else []
     message = "Brak wolnych biurek w tym okresie." if p.has_baseprice() else "Brak ustalonych cen bazowych w tym okresie."
+    request.session['period'] = p
     context = {
-        'period' : p,
         'desks' : desks,
         'message' : message,
     }

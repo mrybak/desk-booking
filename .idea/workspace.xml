@@ -4,12 +4,12 @@
     <list default="true" id="10188bf5-e385-4ad0-ade0-98375376941c" name="Default" comment="" />
     <ignored path="RoomBooking.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/settings.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366943627713" ignored="false" />
+    <file path="/settings.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368644885384" ignored="false" />
     <file path="/Python Console" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366010346347" ignored="false" />
-    <file path="/models.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368577367797" ignored="false" />
+    <file path="/models.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368645674851" ignored="false" />
     <file path="/Django Console" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368577118962" ignored="false" />
     <file path="/admin.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366180754130" ignored="false" />
-    <file path="/views.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368579638703" ignored="false" />
+    <file path="/views.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368658686326" ignored="false" />
     <file path="/urls.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368559082453" ignored="false" />
     <file path="/login.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366937280495" ignored="false" />
     <file path="/desk_detail.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366698153496" ignored="false" />
@@ -42,7 +42,7 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/booking/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="4" selection-start="3831" selection-end="3831" vertical-scroll-proportion="0.6084656">
+            <state line="76" column="29" selection-start="2490" selection-end="2490" vertical-scroll-proportion="-1.4867725">
               <folding>
                 <element signature="e#15#44#0" expanded="true" />
               </folding>
@@ -53,7 +53,7 @@
       <file leaf-file-name="search_desk.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/templates/booking/search_desk.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="23" selection-start="835" selection-end="835" vertical-scroll-proportion="-9.375">
+            <state line="15" column="23" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -62,7 +62,7 @@
       <file leaf-file-name="desk_results.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/templates/booking/desk_results.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="14" selection-start="1134" selection-end="1134" vertical-scroll-proportion="-18.25">
+            <state line="32" column="14" selection-start="1134" selection-end="1134" vertical-scroll-proportion="-16.375">
               <folding />
             </state>
           </provider>
@@ -72,15 +72,6 @@
         <entry file="file://$PROJECT_DIR$/booking/templates/booking/search_room.html">
           <provider selected="true" editor-type-id="text-editor">
             <state line="12" column="48" selection-start="515" selection-end="515" vertical-scroll-proportion="-7.5">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RoomBooking/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="165" column="1" selection-start="5535" selection-end="5535" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -107,10 +98,8 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="19" selection-start="4310" selection-end="4310" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#15#30#0" expanded="true" />
-              </folding>
+            <state line="122" column="22" selection-start="3944" selection-end="3944" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,13 +131,13 @@
         <option value="$PROJECT_DIR$/booking/templates/booking/index.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/base.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/room_results.html" />
-        <option value="$PROJECT_DIR$/RoomBooking/settings.py" />
         <option value="$PROJECT_DIR$/booking/templates/booking/my_reservations.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/search_room.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/search_desk.html" />
         <option value="$PROJECT_DIR$/booking/urls.py" />
-        <option value="$PROJECT_DIR$/booking/models.py" />
         <option value="$PROJECT_DIR$/booking/templates/booking/desk_results.html" />
+        <option value="$PROJECT_DIR$/RoomBooking/settings.py" />
+        <option value="$PROJECT_DIR$/booking/models.py" />
         <option value="$PROJECT_DIR$/booking/views.py" />
       </list>
     </option>
@@ -279,11 +268,11 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -326,27 +315,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <module name="" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -366,6 +334,27 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -432,9 +421,9 @@
       <method />
     </configuration>
     <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Python.Django Console" />
-      <item index="1" class="java.lang.String" itemvalue="Django server.RoomBooking" />
-      <item index="2" class="java.lang.String" itemvalue="Python.models" />
+      <item index="0" class="java.lang.String" itemvalue="Django server.RoomBooking" />
+      <item index="1" class="java.lang.String" itemvalue="Python.models" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Django Console" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -477,11 +466,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22154222" sideWeight="0.67270666" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22460221" sideWeight="0.67270666" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.398641" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3272933" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272933" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -605,32 +594,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/templates/booking/search_room.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="48" selection-start="515" selection-end="515" vertical-scroll-proportion="-7.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/booking/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="19" selection-start="4310" selection-end="4310" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#15#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RoomBooking/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="1" selection-start="5535" selection-end="5535" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/booking/templates/booking/search_desk.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="23" selection-start="835" selection-end="835" vertical-scroll-proportion="-9.375">
+        <state line="15" column="23" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -642,16 +608,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/RoomBooking/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="176" column="1" selection-start="6056" selection-end="6056" vertical-scroll-proportion="0.8677249">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/templates/booking/search_room.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="48" selection-start="515" selection-end="515" vertical-scroll-proportion="-7.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="122" column="22" selection-start="3944" selection-end="3944" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/booking/templates/booking/desk_results.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="14" selection-start="1134" selection-end="1134" vertical-scroll-proportion="-18.25">
+        <state line="32" column="14" selection-start="1134" selection-end="1134" vertical-scroll-proportion="-16.375">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/booking/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="4" selection-start="3831" selection-end="3831" vertical-scroll-proportion="0.6084656">
+        <state line="76" column="29" selection-start="2490" selection-end="2490" vertical-scroll-proportion="-1.4867725">
           <folding>
             <element signature="e#15#44#0" expanded="true" />
           </folding>
