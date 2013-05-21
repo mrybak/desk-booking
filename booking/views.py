@@ -63,23 +63,22 @@ def search_desk(request):
 def search_room(request):
     return render(request, 'booking/search_room.html')
 
+def save_reservation(desk_id, period, user):
+    r = Reservation()
+    r.user = user
+    r.desk = Desk.objects.get(pk = desk_id)
+    log.debug("rezerwacja: ")
+    log.debug(period)
+    log.debug(period.has_baseprice())
+    period.save()
+    log.debug("id: " + str(period.id))
+    r.period_id = period.id
+    r.save()
+
 @login_required
 def book_desk(request):
     try:
-        desk_id = request.POST['desk_id']
-        r = Reservation()
-        r.user = request.user
-        r.desk = Desk.objects.get(pk = desk_id)
-        # ugly hack, trzeba tu tworzyć nowy period
-        p = request.session.get('period')
-        log.debug("rezerwacja: ")
-        log.debug(p)
-        log.debug(p.from_date)
-        log.debug(p.has_baseprice)
-        log.debug(p.id)
-        p.save()
-        r.period_id = p.id
-        r.save()
+        save_reservation(request.POST['desk_id'], request.session.get('period'), request.user)
         return redirect('/booking/my_reservations?success=2')
     except (Exception):
         return redirect('/booking/my_reservations?success=4')
@@ -87,14 +86,10 @@ def book_desk(request):
 @login_required
 def book_room(request):
     try:
+        period = request.session.get('period')
         room_id = request.POST['room_id']
-        r = Reservation()
-        r.user = request.user
-        # change
-        r.desk = Desk.objects.get(pk = room_id)
-        # ugly hack
-        r.period_id = 1
-        r.save()
+        for desk in Desk.objects.filter(room__id=room_id):
+            save_reservation(desk.id, period, request.user)
         return redirect('/booking/my_reservations?success=3')
     except (Exception):
         return redirect('/booking/my_reservations?success=4')
@@ -128,6 +123,7 @@ def desk_results(request):
     context = {
         'desks' : desks,
         'message' : message,
+        'search_period' : p,
     }
     return render(request, 'booking/desk_results.html', context)
 
@@ -144,12 +140,12 @@ def room_results(request):
     for room in Room.objects.all():
         if room.is_free(free_room_ids) and room.count_all_desks() >= min_desks:
             rooms.append(room)
-    log.debug(rooms)
-    message = "Brak wolnych biurek dla podanych kryteriów wyszukiwania."
+    message = "Brak wolnych pokojów dla podanych kryteriów wyszukiwania."
     request.session['period'] = p
     context = {
         'rooms': rooms,
         'message': message,
+        'search_period' : p,
     }
     return render(request, 'booking/room_results.html', context)
 
