@@ -99,8 +99,7 @@ def book_room(request):
     except (Exception):
         return redirect('/booking/my_reservations?success=4')
 
-@login_required
-def desk_results(request):
+def create_reservation_period(request):
     p = ReservationPeriod()
     p.from_hour = 0 if request.GET['hour_from'] == "" else int(request.GET['hour_from'])
     p.to_hour = 24 if request.GET['hour_to'] == "" else int(request.GET['hour_to'])
@@ -115,18 +114,16 @@ def desk_results(request):
     p.sunday = request.GET.get('dayweek_6', False)
     p.user_id = request.user.id
 
-    log.debug('=======================================================================================================')
-    log.debug(p.getHourset())
-    log.debug('\n')
-    log.debug(p)
-    log.debug('\n')
-    log.debug(BasePricePeriod.objects.all())
-    log.debug('\n')
-    log.debug(p.has_baseprice())
+    return p
+
+@login_required
+def desk_results(request):
+    p = create_reservation_period(request)
+
     log.debug('\n\n')
 
-    desks = p.find_free_desks() if p.has_baseprice() else []
-    message = "Brak wolnych biurek w tym okresie." if p.has_baseprice() else "Brak ustalonych cen bazowych w tym okresie."
+    desks = p.find_free_desks(request.GET['city']) if p.has_baseprice() else []
+    message = "Brak wolnych biurek dla podanych kryteriów wyszukiwania."
     request.session['period'] = p
     context = {
         'desks' : desks,
@@ -135,10 +132,28 @@ def desk_results(request):
     return render(request, 'booking/desk_results.html', context)
 
 
-class RoomList(ListView):
-    template_name = 'booking/room_results.html'
-    def get_queryset(self):
-        return Room.objects.all()
+@login_required
+def room_results(request):
+    p = create_reservation_period(request)
+    min_desks = int(request.GET.get('desks_count', 0))
+
+    log.debug('\n\n')
+
+    free_room_ids = p.find_free_desks_ids(request.GET['city']) if p.has_baseprice() else []
+    rooms = []
+    for room in Room.objects.all():
+        if room.is_free(free_room_ids) and room.count_all_desks() >= min_desks:
+            rooms.append(room)
+    log.debug(rooms)
+    message = "Brak wolnych biurek dla podanych kryteriów wyszukiwania."
+    request.session['period'] = p
+    context = {
+        'rooms': rooms,
+        'message': message,
+    }
+    return render(request, 'booking/room_results.html', context)
+
+
 
 class ReservationList(ListView):
     template_name = 'booking/my_reservations.html'

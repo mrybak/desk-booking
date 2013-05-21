@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 from booking import views
-from booking.views import ReservationList, RoomList
+from booking.views import ReservationList
 
 urlpatterns = patterns('',
     url(r'^$', views.login_view, name='login'),
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^book_desk/$', views.book_desk, name='book_desk'),
     url(r'^book_room/$', views.book_room, name='book_room'),
     url(r'^desk_results/$', views.desk_results, name='desk_results'),
-    url(r'^room_results/$', login_required(RoomList.as_view()), name='room_results'),
+    url(r'^room_results/$', views.room_results, name='room_results'),
     url(r'^cancel_reservation/$', views.cancel_reservation, name="cancel_reservation"),
     url(r'^my_reservations/$', login_required(ReservationList.as_view()), name="my_reservations"),
     url(r'^book_desk/(?P<desk_id>\d+)/$', views.book_desk, name='book_desk'),

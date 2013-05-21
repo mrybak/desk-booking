@@ -11,6 +11,16 @@ log = logging.getLogger('myapp.logger')
 class Room(models.Model):
     city = models.CharField(max_length=100)
     street = models.CharField(max_length=100)
+
+    def count_all_desks(self):
+        return Desk.objects.filter(room__id=self.id).count()
+
+    def count_free_desks(self, free_desks_ids):
+        return Desk.objects.filter(id__in=free_desks_ids, room__id=self.id).count()
+
+    def is_free(self, free_desks_ids):
+        return self.count_all_desks() == self.count_free_desks(free_desks_ids)
+
     def __unicode__(self):
         return self.street + " street, " + self.city
 
@@ -79,6 +89,7 @@ class Period(models.Model):
 
     # list of timestamps for all hours in this period
     def getHourset(self):
+        start = time.time()
         hourset = []
         one_day = datetime.timedelta(days=1)
         dayset = self.getDayset()
@@ -95,45 +106,61 @@ class Period(models.Model):
                     timestamp = time.mktime(cur_datetime.timetuple())
                     hourset.append(timestamp)
             cur_day += one_day
+        #log.debug("getHourset lasted: ")
+        #log.debug(time.time() - start)
 
         return hourset
 
-    # does this period contain a given timestamp?
-    def contains(self, timestamp):
-        return self.getHourset().count(timestamp)
-
     # does this period have a non-void intersection with given period?
     def intersects_with(self, other_period):
+        # log.debug("intersects_with start")
+        # start = time.time()
         result = False
+        self_hs = self.getHourset()
         for hour in other_period.getHourset():
-            if self.contains(hour):
+            if self_hs.count(hour):
                 result = True
 
+        # log.debug("intersects_with end, it lasted:")
+        # log.debug(time.time() - start)
         return result
 
     # does every hour of this period have some BasePrice set?
     def has_baseprice(self):
+        # log.debug("has_baseprice start")
+        # start = time.time()
+        all_base_hours = []
+        for bpp in BasePricePeriod.objects.all():
+            all_base_hours.extend(bpp.getHourset())
+
         result = True
         for hour in self.getHourset():
             found = False
-            for bpp in BasePricePeriod.objects.all():
-                 if bpp.contains(hour):
-                    found = True
-            if not found:
+            if not all_base_hours.count(hour):
                 result = False
+        # log.debug("has_baseprice end, it lasted:")
+        # log.debug(time.time() - start)
 
         return result
 
-    def find_free_desks(self):
+    def find_free_desks_ids(self,city=""):
         free_desks_ids = []
-        for desk in Desk.objects.all():
+        for desk in Desk.objects.filter(room__city__contains=city):
             free_desks_ids.append(desk.id)
         for resv in Reservation.objects.all():
             if resv.period.intersects_with(self):
                 if free_desks_ids.count(resv.desk_id):
                     free_desks_ids.remove(resv.desk_id)
+        return free_desks_ids
 
-        return Desk.objects.filter(id__in=free_desks_ids)
+    def find_free_desks(self, city=""):
+        # log.debug("find_free_desks start")
+        # start = time.time()
+
+        # log.debug("find_free_desks end, it lasted:")
+        # log.debug(time.time() - start)
+
+        return Desk.objects.filter(id__in=self.find_free_desks_ids(city))
 
     def __unicode__(self):
         result = "od " + str(self.from_date) + " do " + str(self.to_date) + " w: "

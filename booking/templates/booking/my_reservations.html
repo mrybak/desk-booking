@@ -53,7 +53,6 @@
                <tr>
                    <td>{{  resv.desk }}</td>
                    <td>{{  resv.period }}</td>
-                   <td>{{  resv.period.getHourset }}</td>
                    <td><form method="post" action="{% url 'b:cancel_reservation' %}">
                        {% csrf_token %}
                        <input type="hidden" name="resv_id" value="{{ resv.id }}" />

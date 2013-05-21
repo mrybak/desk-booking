@@ -8,7 +8,7 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'b:room_results' %}" method="get">
-    <input type="number" name="people_count" id="people_count" placeholder="Liczba osób" /><br />
+    <input type="number" name="desks_count" id="desks_count" placeholder="Liczba biurek" /><br />
     <input type="text" name="city" id="city" placeholder="Miasto" /><br />
     <input type="date" name="date_from" id="date_from" placeholder="Od dnia" /><br />
     <input type="date" name="date_to" id="date_to" placeholder="Do dnia" /><br />

@@ -4,7 +4,7 @@
 {%  block content_title %}Wyniki dla okresu {{ period }}{%  endblock %}
 
 {%  block content %}
-    {% if desks.count %}
+    {% if desks.count > 0 %}
     <br />
     <table class="table table-bordered table-striped">
         <thead>

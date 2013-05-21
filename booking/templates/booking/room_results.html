@@ -1,27 +1,30 @@
 {% extends 'booking/base.html' %}
 
 {%  block title %}Wyniki{%  endblock %}
-{%  block content_title %}Wyniki{%  endblock %}
+{%  block content_title %}Wyniki dla okresu {{ period }}{%  endblock %}
 
 {%  block content %}
-    {% if object_list %}
+    {% if rooms.count > 0 %}
         <br />
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Miasto</th>
-                <th>Ulica</th>
+                <th>Adres</th>
+                <th>Liczba biurek</th>
+                <th>Całkowity koszt wynajmu</th>
             </tr>
             </thead>
             <tbody>
-            {% for room in object_list %}
+            {% for room in rooms %}
                 <tr>
-                    <td>{{ room.city }}</td>
-                    <td>{{ room.street }}</td>
+                    <td>{{ room.city }}, {{ room.street }}</td>
+                    <td>{{  room.count_all_desks }}</td>
+                    <td>tu bedzie cena</td>
                     <td>
                         <form method="post" action="{% url 'b:book_room' %}">
                             {% csrf_token %}
                             <input type="hidden" name="room_id" value="{{ room.id }}" />
+                            <input type="hidden" name="period" value="{{ period }}" />
                             <input type="submit" class="btn btn-primary" value="Zarezerwuj" />
                         </form>
                     </td>
@@ -30,6 +33,7 @@
             </tbody>
         </table>
     {% else %}
-        <p>Brak wolnych pokoi w tym okresie.</p>
+        <p>{{ message }}</p>
     {% endif %}
+
 {% endblock %}
