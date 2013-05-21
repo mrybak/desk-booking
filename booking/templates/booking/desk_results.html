@@ -5,31 +5,41 @@
 
 {%  block content %}
     {% if desks.count > 0 %}
-    <br />
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Opis biurka</th>
-                <th>Pokój</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for desk in desks %}
+        <br />
+        <table class="table table-bordered table-striped">
+            <thead>
+                {% load sorting_tags %}
+                {% autosort desks %}
                 <tr>
-                    <td>{{ desk.description }}</td>
-                    <td>{{ desk.room }}</td>
-                    <td>
-                        <form method="post" action="{% url 'b:book_desk' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="desk_id" value="{{ desk.id }}" />
-                            <input type="hidden" name="period" value="{{ period }}" />
-                            <input type="submit" class="btn btn-primary" value="Zarezerwuj" />
-                        </form>
-                    </td>
+                    <th>{% anchor description 'Opis biurka' %}</th>
+                    <th>{% anchor room 'Pokój' %}</th>
+                    <th>Całkowity koszt wynajmu</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% load endless %}
+
+
+                {% paginate desks %}
+                {% for desk in desks %}
+                    <tr>
+                        <td>{{ desk.description }}</td>
+                        <td>{{ desk.room }}</td>
+                        <td>{{ price }}</td>
+                        <td>
+                            <form method="post" action="{% url 'b:book_desk' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="desk_id" value="{{ desk.id }}" />
+                                <input type="hidden" name="period" value="{{ period }}" />
+                                <input type="submit" class="btn btn-primary" value="Zarezerwuj" />
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% get_pages %}
+        {{ pages }}
     {% else %}
         <p>{{ message }}</p>
     {% endif %}

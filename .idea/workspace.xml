@@ -4,12 +4,12 @@
     <list default="true" id="10188bf5-e385-4ad0-ade0-98375376941c" name="Default" comment="" />
     <ignored path="RoomBooking.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/settings.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368644885384" ignored="false" />
+    <file path="/settings.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369129930685" ignored="false" />
     <file path="/Python Console" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366010346347" ignored="false" />
-    <file path="/models.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369119230619" ignored="false" />
-    <file path="/Django Console" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369118987726" ignored="false" />
+    <file path="/models.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369125161100" ignored="false" />
+    <file path="/Django Console" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369128754928" ignored="false" />
     <file path="/admin.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366180754130" ignored="false" />
-    <file path="/views.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369122082702" ignored="false" />
+    <file path="/views.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369131577771" ignored="false" />
     <file path="/urls.py" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369119313888" ignored="false" />
     <file path="/login.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366937280495" ignored="false" />
     <file path="/desk_detail.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366698153496" ignored="false" />
@@ -19,11 +19,11 @@
     <file path="/search_room.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369120448306" ignored="false" />
     <file path="/my_reservations.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368531545670" ignored="false" />
     <file path="/register.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366937564433" ignored="false" />
-    <file path="/desk_results.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369121466853" ignored="false" />
-    <file path="/room_results.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369121524594" ignored="false" />
+    <file path="/desk_results.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369130257847" ignored="false" />
+    <file path="/room_results.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369130389522" ignored="false" />
     <file path="/base_login.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366937369946" ignored="false" />
     <file path="/base.html" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1366942182543" ignored="false" />
-    <file path="/a.dummy" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1368981068016" ignored="false" />
+    <file path="/a.dummy" changelist="10188bf5-e385-4ad0-ade0-98375376941c" time="1369131563525" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,10 +40,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="59" selection-start="2985" selection-end="2985" vertical-scroll-proportion="0.6031746">
+            <state line="74" column="0" selection-start="2353" selection-end="2353" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -61,7 +61,7 @@
       <file leaf-file-name="desk_results.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/templates/booking/desk_results.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="54" selection-start="129" selection-end="129" vertical-scroll-proportion="-1.875">
+            <state line="11" column="36" selection-start="375" selection-end="375" vertical-scroll-proportion="-6.875">
               <folding />
             </state>
           </provider>
@@ -70,7 +70,34 @@
       <file leaf-file-name="room_results.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/templates/booking/room_results.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="14" selection-start="219" selection-end="219" vertical-scroll-proportion="-3.3333333">
+            <state line="16" column="20" selection-start="532" selection-end="532" vertical-scroll-proportion="-10.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="my_reservations.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/booking/templates/booking/my_reservations.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="16" selection-start="933" selection-end="933" vertical-scroll-proportion="-13.125">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RoomBooking/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="121" column="45" selection-start="4384" selection-end="4384" vertical-scroll-proportion="1.8093525">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extra_tags.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/booking/templatetags/extra_tags.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="29" selection-start="207" selection-end="207" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -85,28 +112,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/booking/templates/booking/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="21" selection-start="1397" selection-end="1397" vertical-scroll-proportion="-6.375">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="my_reservations.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/booking/templates/booking/my_reservations.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="46" selection-start="1889" selection-end="1889" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="158" column="0" selection-start="5232" selection-end="5232" vertical-scroll-proportion="0.0">
+            <state line="128" column="4" selection-start="4184" selection-end="4184" vertical-scroll-proportion="-1.76">
               <folding>
                 <element signature="e#15#30#0" expanded="true" />
               </folding>
@@ -135,22 +144,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="/usr/local/lib/python2.7/site-packages/django/contrib/auth/__init__.py" />
         <option value="$PROJECT_DIR$/booking/templates/booking/login.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/base_login.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/register.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/index.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/base.html" />
-        <option value="$PROJECT_DIR$/RoomBooking/settings.py" />
         <option value="$PROJECT_DIR$/booking/sd" />
         <option value="$PROJECT_DIR$/booking/templates/booking/my_reservations.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/search_desk.html" />
-        <option value="$PROJECT_DIR$/booking/models.py" />
         <option value="$PROJECT_DIR$/booking/urls.py" />
         <option value="$PROJECT_DIR$/booking/templates/booking/search_room.html" />
+        <option value="$PROJECT_DIR$/booking/templatetags/extra_tags.py" />
+        <option value="$PROJECT_DIR$/RoomBooking/settings.py" />
         <option value="$PROJECT_DIR$/booking/templates/booking/desk_results.html" />
         <option value="$PROJECT_DIR$/booking/templates/booking/room_results.html" />
         <option value="$PROJECT_DIR$/booking/views.py" />
+        <option value="$PROJECT_DIR$/booking/models.py" />
       </list>
     </option>
   </component>
@@ -215,6 +224,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="booking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RoomBooking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RoomBooking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="booking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templatetags" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -483,18 +510,18 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23990208" sideWeight="0.67270666" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23990208" sideWeight="0.6704417" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.398641" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3272933" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272933" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6708286" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.398641" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -558,15 +585,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/booking/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="51" selection-start="178" selection-end="178" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/booking/templates/booking/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="39" vertical-scroll-proportion="-0.0" />
@@ -592,25 +610,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoomBooking/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="1" selection-start="6056" selection-end="6056" vertical-scroll-proportion="0.8677249" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/booking/templates/booking/my_reservations.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="46" selection-start="1889" selection-end="1889" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/booking/templates/booking/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="21" selection-start="1397" selection-end="1397" vertical-scroll-proportion="-6.375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/booking/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="41" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0">
@@ -620,18 +619,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/models.py">
+    <entry file="file://$PROJECT_DIR$/booking/templates/booking/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="0" selection-start="5232" selection-end="5232" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#15#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/booking/templates/booking/search_desk.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="-3.125">
+        <state line="43" column="21" selection-start="1397" selection-end="1397" vertical-scroll-proportion="0.5185185">
           <folding />
         </state>
       </provider>
@@ -643,23 +633,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/templates/booking/room_results.html">
+    <entry file="file://$PROJECT_DIR$/booking/templates/booking/desk_results.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="14" selection-start="219" selection-end="219" vertical-scroll-proportion="-3.3333333">
+        <state line="11" column="36" selection-start="375" selection-end="375" vertical-scroll-proportion="-6.875">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/templates/booking/desk_results.html">
+    <entry file="file://$PROJECT_DIR$/booking/templates/booking/room_results.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="54" selection-start="129" selection-end="129" vertical-scroll-proportion="-1.875">
+        <state line="16" column="20" selection-start="532" selection-end="532" vertical-scroll-proportion="-10.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/templates/booking/my_reservations.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="16" selection-start="933" selection-end="933" vertical-scroll-proportion="-13.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/templates/booking/search_desk.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="-3.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/templatetags/extra_tags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="29" selection-start="207" selection-end="207" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/booking/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="59" selection-start="2985" selection-end="2985" vertical-scroll-proportion="0.6031746">
+        <state line="74" column="0" selection-start="2353" selection-end="2353" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="4" selection-start="4184" selection-end="4184" vertical-scroll-proportion="-1.76">
+          <folding>
+            <element signature="e#15#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoomBooking/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="45" selection-start="4384" selection-end="4384" vertical-scroll-proportion="1.8093525">
           <folding />
         </state>
       </provider>

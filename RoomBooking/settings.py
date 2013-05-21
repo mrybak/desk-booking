@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django_sorting.middleware.SortingMiddleware'
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -116,6 +117,11 @@ WSGI_APPLICATION = 'RoomBooking.wsgi.application'
 import os
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,7 +136,13 @@ INSTALLED_APPS = (
     'booking',
     'debug_toolbar',
     'south',
+    'endless_pagination',
+    'django_sorting',
 )
+
+ENDLESS_PAGINATION_PER_PAGE = 3
+ENDLESS_PAGINATION_PAGE_LABEL = 'strona'
+
 
 LOGGING = {
     'version': 1,

@@ -1,4 +1,5 @@
 {% extends 'booking/base.html' %}
+{% load extra_tags %}
 
 {%  block title %}Wyniki{%  endblock %}
 {%  block content_title %}Wyniki dla okresu {{ search_period }}{%  endblock %}
@@ -8,18 +9,27 @@
         <br />
         <table class="table table-bordered table-striped">
             <thead>
+            {% load sorting_tags %}
+            {% autosort rooms %}
             <tr>
-                <th>Adres</th>
+                <th>{% anchor city 'Miasto' %}</th>
+                <th>{% anchor street 'Ulica' %}</th>
                 <th>Liczba biurek</th>
+                <th>Koszt wynajmu 1 biurka</th>
                 <th>Całkowity koszt wynajmu</th>
             </tr>
             </thead>
             <tbody>
+            {% load endless %}
+
+            {% paginate rooms %}
             {% for room in rooms %}
                 <tr>
-                    <td>{{ room.city }}, {{ room.street }}</td>
+                    <td>{{ room.city }}</td>
+                    <td>{{ room.street }}</td>
                     <td>{{  room.count_all_desks }}</td>
-                    <td>tu bedzie cena</td>
+                    <td>{{ price }}</td>
+                    <td>{{ room.count_all_desks|mult:price }}</td>
                     <td>
                         <form method="post" action="{% url 'b:book_room' %}">
                             {% csrf_token %}
@@ -32,6 +42,8 @@
             {% endfor %}
             </tbody>
         </table>
+        {% get_pages %}
+        {{ pages }}
     {% else %}
         <p>{{ message }}</p>
     {% endif %}

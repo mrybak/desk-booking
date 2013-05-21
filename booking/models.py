@@ -126,22 +126,37 @@ class Period(models.Model):
         return result
 
     # does every hour of this period have some BasePrice set?
-    def has_baseprice(self):
-        # log.debug("has_baseprice start")
-        # start = time.time()
+    def get_price(self):
+        log.debug("has_baseprice start")
+        start = time.time()
         all_base_hours = []
+        all_base_prices = []
         for bpp in BasePricePeriod.objects.all():
-            all_base_hours.extend(bpp.getHourset())
+            hs = bpp.getHourset()
+            all_base_hours.extend(hs)
+            for _ in hs:
+                all_base_prices.append(bpp.base_price.price)
 
         result = True
+
         for hour in self.getHourset():
             found = False
             if not all_base_hours.count(hour):
                 result = False
-        # log.debug("has_baseprice end, it lasted:")
-        # log.debug(time.time() - start)
+        # if BasePrice is defined, count price for this period
+        if result:
+            hour_prices = dict(zip(all_base_hours, all_base_prices))
+            price = 0
+            for hour in self.getHourset():
+                price += hour_prices.get(hour)
+        else:
+            price = -1
 
-        return result
+        log.debug("has_baseprice end, it lasted:")
+        log.debug(time.time() - start)
+        log.debug("price: " + str(price))
+
+        return price
 
     def find_free_desks_ids(self,city=""):
         free_desks_ids = []
@@ -154,12 +169,6 @@ class Period(models.Model):
         return free_desks_ids
 
     def find_free_desks(self, city=""):
-        # log.debug("find_free_desks start")
-        # start = time.time()
-
-        # log.debug("find_free_desks end, it lasted:")
-        # log.debug(time.time() - start)
-
         return Desk.objects.filter(id__in=self.find_free_desks_ids(city))
 
     def __unicode__(self):

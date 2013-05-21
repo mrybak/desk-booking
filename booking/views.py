@@ -67,13 +67,11 @@ def save_reservation(desk_id, period, user):
     r = Reservation()
     r.user = user
     r.desk = Desk.objects.get(pk = desk_id)
-    log.debug("rezerwacja: ")
-    log.debug(period)
-    log.debug(period.has_baseprice())
     period.save()
-    log.debug("id: " + str(period.id))
     r.period_id = period.id
     r.save()
+    log.debug("rezerwacja: ")
+    log.debug(r)
 
 @login_required
 def book_desk(request):
@@ -81,6 +79,7 @@ def book_desk(request):
         save_reservation(request.POST['desk_id'], request.session.get('period'), request.user)
         return redirect('/booking/my_reservations?success=2')
     except (Exception):
+        log.debug(Exception.message)
         return redirect('/booking/my_reservations?success=4')
 
 @login_required
@@ -117,12 +116,14 @@ def desk_results(request):
 
     log.debug('\n\n')
 
-    desks = p.find_free_desks(request.GET['city']) if p.has_baseprice() else []
+    price = p.get_price()
+    desks = p.find_free_desks(request.GET['city']) if price >= 0 else []
     message = "Brak wolnych biurek dla podanych kryteriów wyszukiwania."
     request.session['period'] = p
     context = {
         'desks' : desks,
         'message' : message,
+        'price' : price,
         'search_period' : p,
     }
     return render(request, 'booking/desk_results.html', context)
@@ -135,16 +136,18 @@ def room_results(request):
 
     log.debug('\n\n')
 
-    free_room_ids = p.find_free_desks_ids(request.GET['city']) if p.has_baseprice() else []
-    rooms = []
+    price = p.get_price()
+    free_room_ids = p.find_free_desks_ids(request.GET['city']) if price >= 0 else []
+    rooms = Room.objects.all()
     for room in Room.objects.all():
-        if room.is_free(free_room_ids) and room.count_all_desks() >= min_desks:
-            rooms.append(room)
+        if not room.is_free(free_room_ids) or room.count_all_desks() < min_desks:
+            rooms.remove(room)
     message = "Brak wolnych pokojów dla podanych kryteriów wyszukiwania."
     request.session['period'] = p
     context = {
         'rooms': rooms,
         'message': message,
+        'price' : price,
         'search_period' : p,
     }
     return render(request, 'booking/room_results.html', context)
