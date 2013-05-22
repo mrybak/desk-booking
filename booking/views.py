@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.db import transaction
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.datastructures import MultiValueDictKeyError
@@ -69,10 +70,14 @@ def save_reservation(desk_id, period, user):
     r.desk = Desk.objects.get(pk = desk_id)
     period.save()
     r.period_id = period.id
+    for resv in Reservation.objects.filter(desk__id=desk_id):
+        if resv.period.intersects_with(period):
+            raise Exception("Te biurko zostało już zarezerwowane przez kogoś innego")
     r.save()
     log.debug("rezerwacja: ")
     log.debug(r)
 
+@transaction.commit_on_success
 @login_required
 def book_desk(request):
     try:
@@ -82,6 +87,7 @@ def book_desk(request):
         log.debug(Exception.message)
         return redirect('/booking/my_reservations?success=4')
 
+@transaction.commit_on_success
 @login_required
 def book_room(request):
     try:
