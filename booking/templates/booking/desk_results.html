@@ -1,10 +1,13 @@
 {% extends 'booking/base.html' %}
 
 {%  block title %}Wyniki{%  endblock %}
-{%  block content_title %}Wyniki dla okresu {{ search_period }}{%  endblock %}
+{%  block content_title %}Wyniki wyszukiwania biurek{%  endblock %}
 
 {%  block content %}
     {% if desks.count > 0 %}
+        <div class="alert alert-info">
+            Poniższe biurka są wolne w okresie <strong>{{ search_period }}</strong>.
+        </div>
         <br />
         <table class="table table-bordered table-striped">
             <thead>

@@ -2,10 +2,13 @@
 {% load extra_tags %}
 
 {%  block title %}Wyniki{%  endblock %}
-{%  block content_title %}Wyniki dla okresu {{ search_period }}{%  endblock %}
+{%  block content_title %}Wyniki wyszukiwania pokojów{%  endblock %}
 
 {%  block content %}
     {% if rooms.count > 0 %}
+        <div class="alert alert-info">
+            Poniższe pokoje są w całości wolne w okresie <strong>{{ search_period }}</strong>.
+        </div>
         <br />
         <table class="table table-bordered table-striped">
             <thead>

@@ -3,24 +3,62 @@
 {%  block title %}Szukaj biurka{%  endblock %}
 {%  block content_title %}Szukaj biurka{%  endblock %}
 {%  block content %}
-
+<p>
+Tutaj możesz wyszukać wszystkie biurka wolne w podanym okresie. <br />
+Podanie miasta jest opcjonalne.<br /><br /><br />
+</p>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'b:desk_results' %}" method="get">
-    <input type="text" name="city" id="city" placeholder="Miasto" /><br />
-    <input type="date" name="date_from" id="date_from" placeholder="Od dnia" /><br />
-    <input type="date" name="date_to" id="date_to" placeholder="Do dnia" /><br />
-    <input type="number" name="hour_from" id="hour_from" placeholder="Od godziny" /><br />
-    <input type="number" name="hour_to" id="hour_to" placeholder="Do godziny" /><br />
-    Wybierz dni: <br />
-    <label  class="checkbox" for="dayweek_0"><input type="checkbox" checked="checked" id="dayweek_0"  name="dayweek_0" />Poniedziałek</label>
-    <label  class="checkbox" for="dayweek_1"><input type="checkbox" checked="checked" id="dayweek_1"  name="dayweek_1" />Wtorek</label>
-    <label  class="checkbox" for="dayweek_2"><input type="checkbox" checked="checked" id="dayweek_2"  name="dayweek_2" />Środa</label>
-    <label  class="checkbox" for="dayweek_3"><input type="checkbox" checked="checked" id="dayweek_3"  name="dayweek_3" />Czwartek</label>
-    <label  class="checkbox" for="dayweek_4"><input type="checkbox" checked="checked" id="dayweek_4"  name="dayweek_4" />Piątek</label>
-    <label  class="checkbox" for="dayweek_5"><input type="checkbox" checked="checked" id="dayweek_5"  name="dayweek_5" />Sobota</label>
-    <label  class="checkbox" for="dayweek_6"><input type="checkbox" checked="checked" id="dayweek_6"  name="dayweek_6" />Niedziela</label>
-    <br />
-    <input type="submit" class="btn btn-primary" value="Szukaj" />
+<form action="{% url 'b:desk_results' %}" method="get" class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label" for="city">Miasto</label>
+        <div class="controls">
+            <input type="text" name="city" id="city" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="date_from">Od dnia</label>
+        <div class="controls">
+            <input type="text" name="date_from" id="date_from" placeholder="np. 2013-05-22" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="date_to">Do dnia</label>
+        <div class="controls">
+            <input type="text" name="date_to" id="date_to" placeholder="np. 2013-05-28" />
+        </div>
+    </div>
+    <div class="alert alert-info controls">
+        Pozostaw pola 'Od godziny' i 'Do godziny' puste, aby wyszukać pokoje wolne przez całą dobę.
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hour_from">Od godziny</label>
+        <div class="controls">
+
+            <input type="text" name="hour_from" id="hour_from" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hour_to">Do godziny</label>
+        <div class="controls">
+            <input type="text" name="hour_to" id="hour_to" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hour_to">Wybierz dni tygodnia</label>
+        <div class="controls">
+            <label  class="checkbox" for="dayweek_0"><input type="checkbox" checked="checked" id="dayweek_0"  name="dayweek_0" />Poniedziałek</label>
+            <label  class="checkbox" for="dayweek_1"><input type="checkbox" checked="checked" id="dayweek_1"  name="dayweek_1" />Wtorek</label>
+            <label  class="checkbox" for="dayweek_2"><input type="checkbox" checked="checked" id="dayweek_2"  name="dayweek_2" />Środa</label>
+            <label  class="checkbox" for="dayweek_3"><input type="checkbox" checked="checked" id="dayweek_3"  name="dayweek_3" />Czwartek</label>
+            <label  class="checkbox" for="dayweek_4"><input type="checkbox" checked="checked" id="dayweek_4"  name="dayweek_4" />Piątek</label>
+            <label  class="checkbox" for="dayweek_5"><input type="checkbox" checked="checked" id="dayweek_5"  name="dayweek_5" />Sobota</label>
+            <label  class="checkbox" for="dayweek_6"><input type="checkbox" checked="checked" id="dayweek_6"  name="dayweek_6" />Niedziela</label>
+
+            <br />
+            <input type="submit" class="btn btn-primary" value="Szukaj" />
+        </div>
+    </div>
+
 </form>
 {% endblock %}

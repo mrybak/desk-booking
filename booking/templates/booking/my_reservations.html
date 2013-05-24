@@ -51,7 +51,8 @@
            <tbody>
            {% for resv in object_list %}
                <tr>
-                   <td>{{  resv.desk }}</td>
+                   <td>{{  resv.desk.description }} <br />
+                   ({{ resv.desk }})</td>
                    <td>{{  resv.period }}</td>
                    <td><form method="post" action="{% url 'b:cancel_reservation' %}">
                        {% csrf_token %}

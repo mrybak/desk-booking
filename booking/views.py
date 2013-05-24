@@ -144,10 +144,12 @@ def room_results(request):
 
     price = p.get_price()
     free_room_ids = p.find_free_desks_ids(request.GET['city']) if price >= 0 else []
+    occupated_room_ids = []
     rooms = Room.objects.all()
     for room in Room.objects.all():
         if not room.is_free(free_room_ids) or room.count_all_desks() < min_desks:
-            rooms.remove(room)
+            occupated_room_ids.append(room.id)
+    rooms = Room.objects.exclude(id__in=occupated_room_ids)
     message = "Brak wolnych pokojów dla podanych kryteriów wyszukiwania."
     request.session['period'] = p
     context = {

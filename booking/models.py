@@ -22,14 +22,14 @@ class Room(models.Model):
         return self.count_all_desks() == self.count_free_desks(free_desks_ids)
 
     def __unicode__(self):
-        return self.street + " street, " + self.city
+        return self.street + " , " + self.city
 
 
 class Desk(models.Model):
     room = models.ForeignKey(Room)
     description = models.TextField()
     def __unicode__(self):
-        return "in: " + str(self.room)
+        return str(self.room)
 
 class BasePrice(models.Model):
     name = models.CharField(max_length=200)
