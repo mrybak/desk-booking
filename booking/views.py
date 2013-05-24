@@ -67,10 +67,10 @@ def search_room(request):
 def save_reservation(desk_id, period, user):
     r = Reservation()
     r.user = user
-    r.desk = Desk.objects.get(pk = desk_id)
+    r.desk = Desk.objects.select_for_update().get(pk = desk_id)
     period.save()
     r.period_id = period.id
-    for resv in Reservation.objects.filter(desk__id=desk_id):
+    for resv in Reservation.objects.select_for_update().filter(desk__id=desk_id):
         if resv.period.intersects_with(period):
             raise Exception("Te biurko zostało już zarezerwowane przez kogoś innego")
     r.save()
@@ -93,7 +93,7 @@ def book_room(request):
     try:
         period = request.session.get('period')
         room_id = request.POST['room_id']
-        for desk in Desk.objects.filter(room__id=room_id):
+        for desk in Desk.objects.select_for_update().filter(room__id=room_id):
             save_reservation(desk.id, period, request.user)
         return redirect('/booking/my_reservations?success=3')
     except (Exception):
@@ -138,7 +138,7 @@ def desk_results(request):
 @login_required
 def room_results(request):
     p = create_reservation_period(request)
-    min_desks = int(request.GET.get('desks_count', 0))
+    min_desks = 0 if request.GET['desks_count'] == "" else int(request.GET['desks_count'])
 
     log.debug('\n\n')
 
