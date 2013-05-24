@@ -8,7 +8,32 @@ function validate_form() {
         }
     });
 
-    var hour_from = $('')
+    console.log("1: " + error_count);
+
+
+    $('.numeric').each(function () {
+        $(this).removeClass('error');
+        console.log(isNaN(parseInt($(this).val(), 10)));
+        console.log($(this).val() !== '');
+        if (isNaN(parseInt($(this).val(), 10)) && $(this).val() !== '') {
+            error_count++;
+            $(this).addClass('error');
+        }
+    });
+
+    console.log("2: " + error_count);
+
+    var hour_from = $('#hour_from').val();
+    var hour_to = $('#hour_to').val();
+
+    // FAIL
+    if (hour_from !== '' && hour_to !== '') {
+        if (hour_from >= hour_to /* is_numeric itd */) {
+            error_count++;
+        }
+    }
+
+    console.log("3: " + error_count);
 
     return error_count == 0;
 }
