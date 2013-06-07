@@ -26,7 +26,7 @@ function validate_form() {
     var hour_from = $('#hour_from').val();
     var hour_to = $('#hour_to').val();
 
-    // FAIL
+    // TODO: clean up this failure
     if (hour_from !== '' && hour_to !== '') {
         if (hour_from >= hour_to /* is_numeric itd */) {
             error_count++;

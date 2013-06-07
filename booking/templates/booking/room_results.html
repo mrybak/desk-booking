@@ -5,7 +5,7 @@
 {%  block content_title %}Wyniki wyszukiwania pokojów{%  endblock %}
 
 {%  block content %}
-    {% if rooms.count > 0 %}
+    {% if rooms %}
         <div class="alert alert-info">
             Poniższe pokoje są w całości wolne w okresie <strong>{{ search_period }}</strong>.
         </div>
@@ -19,7 +19,8 @@
                 <th>{% anchor street 'Ulica' %}</th>
                 <th>Liczba biurek</th>
                 <th>Koszt wynajmu 1 biurka</th>
-                <th>Całkowity koszt wynajmu</th>
+                <th>Całkowity koszt wynajmu<sup>1</sup></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
             {% endfor %}
             </tbody>
         </table>
+        <p class="help-inline"><sup>1</sup> bez zniżek</p><br />
         {% get_pages %}
         {{ pages }}
     {% else %}

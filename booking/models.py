@@ -5,6 +5,7 @@ import time
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ModelForm
+from numpy.core import multiarray
 
 log = logging.getLogger('myapp.logger')
 
@@ -112,22 +113,23 @@ class Period(models.Model):
         return hourset
 
     # does this period have a non-void intersection with given period?
+    # returns number of hours of such an intersection
     def intersects_with(self, other_period):
         # log.debug("intersects_with start")
         # start = time.time()
-        result = False
+        result = 0
         self_hs = self.getHourset()
         for hour in other_period.getHourset():
             if self_hs.count(hour):
-                result = True
+                result += 1
 
         # log.debug("intersects_with end, it lasted:")
-        # log.debug(time.time() - start)
+        # log.debug("intersect by " + str(result))
         return result
 
-    # does every hour of this period have some BasePrice set?
-    def get_price(self):
-        log.debug("has_baseprice start")
+    # get price for every hours in this period
+    def get_prices(self):
+        # log.debug("get_price start")
         start = time.time()
         all_base_hours = []
         all_base_prices = []
@@ -144,19 +146,24 @@ class Period(models.Model):
             if not all_base_hours.count(hour):
                 result = False
         # if BasePrice is defined, count price for this period
+        prices = []
         if result:
             hour_prices = dict(zip(all_base_hours, all_base_prices))
-            price = 0
             for hour in self.getHourset():
-                price += hour_prices.get(hour)
+                prices.append(hour_prices.get(hour))
+
+        # log.debug("get_price end, it lasted:")
+        # log.debug(time.time() - start)
+        # log.debug("prices: " + str(prices))
+
+        return prices
+
+    def get_price(self):
+        price = sum(self.get_prices())
+        if price > 0:
+            return price
         else:
-            price = -1
-
-        log.debug("has_baseprice end, it lasted:")
-        log.debug(time.time() - start)
-        log.debug("price: " + str(price))
-
-        return price
+            return -1 # this sucks
 
     def find_free_desks_ids(self,city=""):
         free_desks_ids = []
@@ -166,7 +173,10 @@ class Period(models.Model):
             if resv.period.intersects_with(self):
                 if free_desks_ids.count(resv.desk_id):
                     free_desks_ids.remove(resv.desk_id)
+        # log.debug("free_desks_ids:")
+        # log.debug(free_desks_ids)
         return free_desks_ids
+
 
     def find_free_desks(self, city=""):
         return Desk.objects.filter(id__in=self.find_free_desks_ids(city))
@@ -226,6 +236,83 @@ class PersonHourDiscountPeriod(Period):
 
 class ReservationPeriod(Period):
     user = models.ForeignKey(User)
+
+    def apply_personhoursdiscount(self):
+        hs = self.getHourset()
+        multipliers = []
+
+        applicable_discounts = []
+        for phd in PersonHourDiscountPeriod.objects.all():
+            if phd.intersects_with(self) >= phd.person_hour_discount.min_hours:
+                applicable_discounts.append(phd)
+        # log.debug("applicable_discounts")
+        # log.debug(applicable_discounts)
+
+        for hour in hs:
+            # start with multiplier 1
+            multiplier = 1
+            for phd in applicable_discounts:
+                if phd.getHourset().count(hour):
+                    multiplier = multiplier * (1 - float(phd.person_hour_discount.discount_percents) / 100)
+            multipliers.append(multiplier)
+
+        return multipliers
+
+    def apply_wholeroomdiscount(self):
+        hs = self.getHourset()
+        multipliers = []
+
+        applicable_discounts = []
+
+        for resv in Reservation.objects.filter(user=self.user, period=self):
+            # log.debug("matching reservation: ")
+            # log.debug(resv)
+            if Reservation.objects.filter(user=self.user, desk__room=resv.desk.room).count() == resv.desk.room.count_all_desks():
+                for wrd in WholeRoomDiscountPeriod.objects.all():
+                    if wrd.intersects_with(self) and not applicable_discounts.count(wrd):
+                        applicable_discounts.append(wrd)
+
+
+        # log.debug("applicable_discounts")
+        # log.debug(applicable_discounts)
+
+        for hour in hs:
+            multiplier = 1
+            for wrd in applicable_discounts:
+                if wrd.getHourset().count(hour):
+                    multiplier = multiplier * (1 - float(wrd.whole_room_discount.discount_percents) / 100)
+            multipliers.append(multiplier)
+
+        return multipliers
+
+
+    def get_final_price(self):
+        phd_mult = self.apply_personhoursdiscount()
+        wrd_mult = self.apply_wholeroomdiscount()
+
+        # log.debug("phd_mult")
+        # log.debug(phd_mult)
+        # log.debug("wrd_mult")
+        # log.debug(wrd_mult)
+
+        # final discount multipliers for every hour in self.getHourset
+        td_mult = [round(phd_mult[i] * wrd_mult[i],2) for i in range(len(phd_mult))]
+
+
+        # log.debug("tcx_mult")
+        # log.debug(td_mult)
+
+        # price for every hour in self.getHourset
+        prices = self.get_prices()
+        # log.debug("prices")
+        # log.debug(prices)
+
+        # price * discount...
+        prices_with_discount = [round(td_mult[i] * prices[i],2) for i in range(len(td_mult))]
+        # log.debug("prices with discount")
+        # log.debug(prices_with_discount)
+
+        return int(sum(prices_with_discount))
 
 class PeriodForm(ModelForm):
     class Meta:

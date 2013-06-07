@@ -46,6 +46,9 @@
                <tr>
                    <th>Biurko</th>
                    <th>Okres</th>
+                   <th>Cena bazowa<sup>1</sup></th>
+                   <th>Cena ostateczna<sup>2</sup></th>
+                   <th></th>
                </tr>
            </thead>
            <tbody>
@@ -54,6 +57,8 @@
                    <td>{{  resv.desk.description }} <br />
                    ({{ resv.desk }})</td>
                    <td>{{  resv.period }}</td>
+                   <td>{{  resv.period.get_price }}</td>
+                   <td><strong>{{  resv.period.get_final_price }}</strong></td>
                    <td><form method="post" action="{% url 'b:cancel_reservation' %}">
                        {% csrf_token %}
                        <input type="hidden" name="resv_id" value="{{ resv.id }}" />
@@ -64,6 +69,8 @@
            {% endfor %}
            </tbody>
     </table>
+        <p class="disabled"><sup>1</sup> bez zniżek</p>
+        <p class="disabled"><sup>2</sup> po uwzględnieniu wszystkich zniżek</p>
     {% else %}
         <p>Twoja lista rezerwacji jest pusta.</p>
     {% endif %}

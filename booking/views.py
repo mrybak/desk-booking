@@ -9,6 +9,7 @@ from django.db import transaction
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.datastructures import MultiValueDictKeyError
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView
 from booking.models import Desk, BasePricePeriod, BasePrice, ReservationPeriod, Room, Reservation
 
@@ -84,7 +85,7 @@ def book_desk(request):
         save_reservation(request.POST['desk_id'], request.session.get('period'), request.user)
         return redirect('/booking/my_reservations?success=2')
     except (Exception):
-        log.debug(Exception.message)
+        log.debug(Exception.message())
         return redirect('/booking/my_reservations?success=4')
 
 @transaction.commit_on_success
@@ -140,12 +141,9 @@ def room_results(request):
     p = create_reservation_period(request)
     min_desks = 0 if request.GET['desks_count'] == "" else int(request.GET['desks_count'])
 
-    log.debug('\n\n')
-
     price = p.get_price()
     free_room_ids = p.find_free_desks_ids(request.GET['city']) if price >= 0 else []
     occupated_room_ids = []
-    rooms = Room.objects.all()
     for room in Room.objects.all():
         if not room.is_free(free_room_ids) or room.count_all_desks() < min_desks:
             occupated_room_ids.append(room.id)
@@ -159,7 +157,6 @@ def room_results(request):
         'search_period' : p,
     }
     return render(request, 'booking/room_results.html', context)
-
 
 
 class ReservationList(ListView):

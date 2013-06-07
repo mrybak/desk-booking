@@ -13,12 +13,20 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/students/inf/m/mr321163/WWW/24_05_2013/db.sqlite',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/mrybak/PycharmProjects/RoomBooking/db.sqlite',                      # Or path to database file if using sqlite3.
+        #'NAME': '/home/students/inf/m/mr321163/WWW/24_05_2013/db.sqlite',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake'
     }
 }
 
@@ -102,6 +110,9 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django_sorting.middleware.SortingMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -145,45 +156,45 @@ ENDLESS_PAGINATION_PER_PAGE = 3
 ENDLESS_PAGINATION_PAGE_LABEL = 'strona'
 
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
 #         Include the default Django email handler for errors
 #         This is what you'd get without configuring logging at all.
-        # 'mail_admins': {
-        #     'class': 'django.utils.log.AdminEmailHandler',
-        #     'level': 'ERROR',
+        'mail_admins': {
+            'class': 'django.utils.log.AdminEmailHandler',
+            'level': 'ERROR',
         #     But the emails are plain text by default - HTML is nicer
-            # 'include_html': True,
-            # },
+            'include_html': True,
+            },
         # Log to a text file that can be rotated by logrotate
-        # 'logfile': {
-        #     'class': 'logging.handlers.WatchedFileHandler',
-        #     'filename': '/home/mrybak/PycharmProjects/RoomBooking/booking.log'
-        # },
-    # },
-    # 'loggers': {
+        'logfile': {
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': '/home/mrybak/PycharmProjects/RoomBooking/booking.log'
+        },
+    },
+    'loggers': {
     #     Again, default Django configuration to email unhandled exceptions
-        # 'django.request': {
-        #     'handlers': ['mail_admins'],
-        #     'level': 'ERROR',
-        #     'propagate': True,
-        #     },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+            },
         # Might as well log any errors anywhere else in Django
-        # 'django': {
-        #     'handlers': ['logfile'],
-        #     'level': 'ERROR',
-        #     'propagate': False,
-        #     },
+        'django': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+            },
         # Your own app - this assumes all your logger names start with "myapp."
-        # 'myapp.logger': {
-        #     'handlers': ['logfile'],
-        #     'level': 'DEBUG', # Or maybe INFO or DEBUG
-        #     'propagate': False
-        # },
-    # },
-# }
+        'myapp.logger': {
+            'handlers': ['logfile'],
+            'level': 'DEBUG', # Or maybe INFO or DEBUG
+            'propagate': False
+        },
+    },
+}
 
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
