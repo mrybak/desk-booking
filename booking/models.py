@@ -23,7 +23,7 @@ class Room(models.Model):
         return self.count_all_desks() == self.count_free_desks(free_desks_ids)
 
     def __unicode__(self):
-        return self.street + " , " + self.city
+        return self.street + ", " + self.city
 
 
 class Desk(models.Model):
@@ -236,6 +236,7 @@ class PersonHourDiscountPeriod(Period):
 
 class ReservationPeriod(Period):
     user = models.ForeignKey(User)
+    final_price = models.IntegerField()
 
     def apply_personhoursdiscount(self):
         hs = self.getHourset()
@@ -287,32 +288,56 @@ class ReservationPeriod(Period):
 
 
     def get_final_price(self):
-        phd_mult = self.apply_personhoursdiscount()
-        wrd_mult = self.apply_wholeroomdiscount()
+        # log.debug("self.final price is: ")
+        # log.debug(self.final_price)
+        # this has yet to be cleared on adding a resvperiod
+        if self.final_price == -1:
+            # log.debug("get_final_price start")
+            # start = time.time()
+            phd_mult = self.apply_personhoursdiscount()
+            # start = time.time()
+            wrd_mult = self.apply_wholeroomdiscount()
 
-        # log.debug("phd_mult")
-        # log.debug(phd_mult)
-        # log.debug("wrd_mult")
-        # log.debug(wrd_mult)
+            # log.debug("phd_mult")
+            # log.debug(phd_mult)
+            # log.debug("wrd_mult")
+            # log.debug(wrd_mult)
 
-        # final discount multipliers for every hour in self.getHourset
-        td_mult = [round(phd_mult[i] * wrd_mult[i],2) for i in range(len(phd_mult))]
+            # final discount multipliers for every hour in self.getHourset
+            td_mult = [round(phd_mult[i] * wrd_mult[i],2) for i in range(len(phd_mult))]
 
 
-        # log.debug("tcx_mult")
-        # log.debug(td_mult)
+            # log.debug("tcx_mult")
+            # log.debug(td_mult)
 
-        # price for every hour in self.getHourset
-        prices = self.get_prices()
-        # log.debug("prices")
-        # log.debug(prices)
+            # price for every hour in self.getHourset
+            prices = self.get_prices()
+            # log.debug("prices")
+            # log.debug(prices)
 
-        # price * discount...
-        prices_with_discount = [round(td_mult[i] * prices[i],2) for i in range(len(td_mult))]
-        # log.debug("prices with discount")
-        # log.debug(prices_with_discount)
+            # price * discount...
+            prices_with_discount = [round(td_mult[i] * prices[i],2) for i in range(len(td_mult))]
+            # log.debug("prices with discount")
+            # log.debug(prices_with_discount)
 
-        return int(sum(prices_with_discount))
+
+            # log.debug("get_final_price end, it lasted:")
+            # log.debug(time.time() - start)
+            # log.debug("====================================================================")
+
+            # cache result
+            self.final_price = int(sum(prices_with_discount))
+            self.save()
+
+            # log.debug("cached self.final price is: ")
+            # log.debug(self.final_price)
+
+            return int(sum(prices_with_discount))
+        else:
+            # log.debug("get_final_price from cache")
+            # log.debug("====================================================================")
+
+            return self.final_price
 
 class PeriodForm(ModelForm):
     class Meta:
