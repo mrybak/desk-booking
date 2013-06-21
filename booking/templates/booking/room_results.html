@@ -39,6 +39,7 @@
                             {% csrf_token %}
                             <input type="hidden" name="room_id" value="{{ room.id }}" />
                             <input type="hidden" name="period" value="{{ period }}" />
+                            <input type="hidden" name="s_key" value="{{ session_key_name }}" />
                             <input type="submit" class="btn btn-primary" value="Zarezerwuj" />
                         </form>
                     </td>

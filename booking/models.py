@@ -290,7 +290,6 @@ class ReservationPeriod(Period):
     def get_final_price(self):
         # log.debug("self.final price is: ")
         # log.debug(self.final_price)
-        # this has yet to be cleared on adding a resvperiod
         if self.final_price == -1:
             # log.debug("get_final_price start")
             # start = time.time()

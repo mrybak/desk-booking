@@ -1,6 +1,7 @@
 # coding=utf-8
 from datetime import datetime
 import logging
+import random
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -16,6 +17,7 @@ from booking.models import Desk, BasePricePeriod, BasePrice, ReservationPeriod, 
 log = logging.getLogger('myapp.logger')
 
 def login_view(request):
+
     return render(request, 'booking/login.html')
 
 def logout_view(request):
@@ -83,7 +85,7 @@ def save_reservation(desk_id, period, user):
 @login_required
 def book_desk(request):
     try:
-        save_reservation(request.POST['desk_id'], request.session.get('period'), request.user)
+        save_reservation(request.POST['desk_id'], request.session.get(request.POST['s_key']), request.user)
         return redirect('/booking/my_reservations?success=2')
     except (Exception):
         log.debug(Exception.message())
@@ -93,7 +95,7 @@ def book_desk(request):
 @login_required
 def book_room(request):
     try:
-        period = request.session.get('period')
+        period = request.session.get(request.POST['s_key'])
         room_id = request.POST['room_id']
         for desk in Desk.objects.select_for_update().filter(room__id=room_id):
             save_reservation(desk.id, period, request.user)
@@ -120,6 +122,7 @@ def create_reservation_period(request):
     return p
 
 @login_required
+@cache_page(60 * 60 * 24 * 30)
 def desk_results(request):
     p = create_reservation_period(request)
 
@@ -128,17 +131,20 @@ def desk_results(request):
     price = p.get_price()
     desks = p.find_free_desks(request.GET['city']) if price >= 0 else []
     message = "Brak wolnych biurek dla podanych kryteriów wyszukiwania."
-    request.session['period'] = p
+    s_key = str(random.randint(0,1000000))
+    request.session[s_key] = p
     context = {
         'desks' : desks,
         'message' : message,
         'price' : price,
         'search_period' : p,
+        'session_key_name' : s_key
     }
     return render(request, 'booking/desk_results.html', context)
 
 
 @login_required
+@cache_page(60 * 60 * 24 * 30)
 def room_results(request):
     p = create_reservation_period(request)
     min_desks = 0 if request.GET['desks_count'] == "" else int(request.GET['desks_count'])
@@ -151,12 +157,14 @@ def room_results(request):
             occupated_room_ids.append(room.id)
     rooms = Room.objects.exclude(id__in=occupated_room_ids)
     message = "Brak wolnych pokojów dla podanych kryteriów wyszukiwania."
-    request.session['period'] = p
+    s_key = str(random.randint(0, 1000000))
+    request.session[s_key] = p
     context = {
         'rooms': rooms,
         'message': message,
         'price' : price,
         'search_period' : p,
+        'session_key_name' : s_key
     }
     return render(request, 'booking/room_results.html', context)
 

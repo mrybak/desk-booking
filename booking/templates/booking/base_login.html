@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,15 +47,17 @@
 
 <body>
 
+{% trans "Zaloguj się" as log_in  %}
+
 <div class="container">
     {% block form %}
     <form method="post" class="form-signin" action="{% url 'b:verify' %}">
         {% csrf_token %}
-        <h2 class="form-signin-heading">Zaloguj się</h2>
-        <input type="text" class="input-block-level" name="username" placeholder="Email">
-        <input type="password" class="input-block-level" name="password" placeholder="Hasło">
-        <button class="btn btn-large btn-primary" type="submit">Zaloguj się</button>
-        <p><br /><a href="{% url 'b:register' %}">Zarejestruj się</a></p>
+        <h2 class="form-signin-heading">{{ log_in }}</h2>
+        <input type="text" class="input-block-level" name="username" placeholder="{% trans "Email" noop %}">
+        <input type="password" class="input-block-level" name="password" placeholder="{% trans "Hasło" noop %}">
+        <button class="btn btn-large btn-primary" type="submit">{{ log_in }}</button>
+        <p><br /><a href="{% url 'b:register' %}">{% trans "Zarejestruj się"  %}</a></p>
     </form>
      {%  endblock %}
 </div> <!-- /container -->

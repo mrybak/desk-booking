@@ -1,5 +1,6 @@
 # Django settings for RoomBooking project.
 # coding=utf-8
+from django.utils.translation import ugettext
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -23,12 +24,11 @@ DATABASES = {
     }
 }
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-#         'LOCATION': 'unique-snowflake'
-#     }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -102,17 +102,15 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django_sorting.middleware.SortingMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -123,6 +121,10 @@ ROOT_URLCONF = 'RoomBooking.urls'
 
 LOGIN_URL = '/booking/'
 
+LOCALE_PATHS = (
+    '/home/mrybak/PycharmProjects/RoomBooking/booking/locale/',
+)
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'RoomBooking.wsgi.application'
 
@@ -131,6 +133,7 @@ TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').repl
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.i18n',
     'django.core.context_processors.request',
 )
 
