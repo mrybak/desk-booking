@@ -20,5 +20,4 @@ urlpatterns = patterns('',
     url(r'^my_reservations/$', login_required(ReservationList.as_view()), name="my_reservations"),
     url(r'^book_desk/(?P<desk_id>\d+)/$', views.book_desk, name='book_desk'),
     url(r'^book_room/(?P<room_id>\d+)/$', views.book_room, name='book_room'),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
 )

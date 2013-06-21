@@ -236,7 +236,7 @@ class PersonHourDiscountPeriod(Period):
 
 class ReservationPeriod(Period):
     user = models.ForeignKey(User)
-    final_price = models.IntegerField()
+    final_price = models.IntegerField(default=-1)
 
     def apply_personhoursdiscount(self):
         hs = self.getHourset()
@@ -244,10 +244,11 @@ class ReservationPeriod(Period):
 
         applicable_discounts = []
         for phd in PersonHourDiscountPeriod.objects.all():
+            # could also iterate over all user's reservations...
             if phd.intersects_with(self) >= phd.person_hour_discount.min_hours:
                 applicable_discounts.append(phd)
-        # log.debug("applicable_discounts")
-        # log.debug(applicable_discounts)
+        log.debug("applicable_discounts")
+        log.debug(applicable_discounts)
 
         for hour in hs:
             # start with multiplier 1
@@ -266,16 +267,18 @@ class ReservationPeriod(Period):
         applicable_discounts = []
 
         for resv in Reservation.objects.filter(user=self.user, period=self):
-            # log.debug("matching reservation: ")
-            # log.debug(resv)
-            if Reservation.objects.filter(user=self.user, desk__room=resv.desk.room).count() == resv.desk.room.count_all_desks():
+            log.debug("matching reservation: ")
+            log.debug(resv)
+            log.debug(Reservation.objects.filter(user=self.user, desk__room=resv.desk.room, period=self).count())
+            log.debug(resv.desk.room.count_all_desks())
+            if Reservation.objects.filter(user=self.user, desk__room=resv.desk.room, period=self).count() == resv.desk.room.count_all_desks():
                 for wrd in WholeRoomDiscountPeriod.objects.all():
                     if wrd.intersects_with(self) and not applicable_discounts.count(wrd):
                         applicable_discounts.append(wrd)
 
 
-        # log.debug("applicable_discounts")
-        # log.debug(applicable_discounts)
+        log.debug("applicable_discounts")
+        log.debug(applicable_discounts)
 
         for hour in hs:
             multiplier = 1
@@ -288,53 +291,53 @@ class ReservationPeriod(Period):
 
 
     def get_final_price(self):
-        # log.debug("self.final price is: ")
-        # log.debug(self.final_price)
+        log.debug("self.final price is: ")
+        log.debug(self.final_price)
         if self.final_price == -1:
-            # log.debug("get_final_price start")
-            # start = time.time()
+            log.debug("get_final_price start")
+            start = time.time()
             phd_mult = self.apply_personhoursdiscount()
             # start = time.time()
             wrd_mult = self.apply_wholeroomdiscount()
 
-            # log.debug("phd_mult")
-            # log.debug(phd_mult)
-            # log.debug("wrd_mult")
-            # log.debug(wrd_mult)
+            log.debug("phd_mult")
+            log.debug(phd_mult)
+            log.debug("wrd_mult")
+            log.debug(wrd_mult)
 
             # final discount multipliers for every hour in self.getHourset
             td_mult = [round(phd_mult[i] * wrd_mult[i],2) for i in range(len(phd_mult))]
 
 
-            # log.debug("tcx_mult")
-            # log.debug(td_mult)
+            log.debug("tcx_mult")
+            log.debug(td_mult)
 
             # price for every hour in self.getHourset
             prices = self.get_prices()
-            # log.debug("prices")
-            # log.debug(prices)
+            log.debug("prices")
+            log.debug(prices)
 
             # price * discount...
             prices_with_discount = [round(td_mult[i] * prices[i],2) for i in range(len(td_mult))]
-            # log.debug("prices with discount")
-            # log.debug(prices_with_discount)
+            log.debug("prices with discount")
+            log.debug(prices_with_discount)
 
 
-            # log.debug("get_final_price end, it lasted:")
-            # log.debug(time.time() - start)
-            # log.debug("====================================================================")
+            log.debug("get_final_price end, it lasted:")
+            log.debug(time.time() - start)
+            log.debug("====================================================================")
 
             # cache result
             self.final_price = int(sum(prices_with_discount))
             self.save()
 
-            # log.debug("cached self.final price is: ")
-            # log.debug(self.final_price)
+            log.debug("cached self.final price is: ")
+            log.debug(self.final_price)
 
             return int(sum(prices_with_discount))
         else:
-            # log.debug("get_final_price from cache")
-            # log.debug("====================================================================")
+            log.debug("get_final_price from cache")
+            log.debug("====================================================================")
 
             return self.final_price
 

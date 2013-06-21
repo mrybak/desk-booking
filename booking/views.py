@@ -71,6 +71,7 @@ def save_reservation(desk_id, period, user):
     r = Reservation()
     r.user = user
     r.desk = Desk.objects.select_for_update().get(pk = desk_id)
+    period.save()
     period.final_price = period.get_final_price()
     period.save()
     r.period_id = period.id
@@ -117,7 +118,6 @@ def create_reservation_period(request):
     p.saturday = request.GET.get('dayweek_5', False)
     p.sunday = request.GET.get('dayweek_6', False)
     p.user_id = request.user.id
-    p.final_price = -1
 
     return p
 
